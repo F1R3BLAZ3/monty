@@ -13,6 +13,7 @@ int main(int argc, char **argv)
 		printf("USAGE: monty file\n");
 		error_exit(&stack);
 	}
+        init_args(&stack);
         file_read(argv[1], &stack);
 
         return (0);
