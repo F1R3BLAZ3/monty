@@ -4,9 +4,9 @@ void file_read(char *filename, stack_t **stack)
 {
 	size_t n = 0;
 	int line_number = 1, read;
-	FILE *file = fopen(filename, "r");
+	arguments->file = fopen(filename, "r");
 
-	if (file == NULL)
+	if (arguments->file == NULL)
 	{
 		printf("Error: Can't open file %s\n", filename);
 		error_exit(stack);
