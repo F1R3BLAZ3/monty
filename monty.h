@@ -7,7 +7,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <ctype.h>
+#include <sys/stat.h>
 
 /* Data Structures */
 
@@ -41,10 +43,23 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+typedef struct arg_s
+{
+        FILE *file;
+        char *line;
+} arg_t;
+
+/* Global Variables */
+
+extern arg_t *arguments;
+
 /* Function Declarations */
 
-int main(int argc, char *argv);
+int main(int argc, char **argv);
 void file_read(char *filename, stack_t **stack);
 void error_exit(stack_t **stack);
+char *line_tokenize(char *line);
+void init_args(stack_t **stack);
+void free_args(stack_t *head);
 
 #endif /* MONTY_H */

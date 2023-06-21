@@ -1,7 +1,10 @@
 #include "monty.h"
 
-int main(int argc, char *argv)
+arg_t *arguments = NULL;
+
+int main(int argc, char **argv)
 {
+        (void) argv;
         stack_t *stack;
 
 	stack = NULL;
