@@ -4,8 +4,8 @@ arg_t *arguments = NULL;
 
 int main(int argc, char **argv)
 {
-        (void) argv;
         stack_t *stack;
+        (void) argv;
 
 	stack = NULL;
 	if (argc != 2)

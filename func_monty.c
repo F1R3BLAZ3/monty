@@ -9,7 +9,7 @@ void file_read(char *filename, stack_t **stack)
 	if (file == NULL)
 	{
 		printf("Error: Can't open file %s\n", filename);
-		error_exit(*stack);
+		error_exit(stack);
 	}
 
 	while ((read = getline(&arguments->line, &n, arguments->file)) != -1)
@@ -41,7 +41,7 @@ void init_args(stack_t **stack)
 	if (arguments == NULL)
 	{
 		printf("Error: malloc failed\n");
-		error_exit(*stack);
+		error_exit(stack);
 	}
 	arguments->file = NULL;
 	arguments->line = NULL;

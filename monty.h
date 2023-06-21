@@ -1,6 +1,10 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+/* Macros */
+
+#define _GNU_SOURCE
+
 /* Includes */
 
 #include <stdio.h>
