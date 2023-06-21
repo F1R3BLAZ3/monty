@@ -19,3 +19,10 @@ void free_stack(stack_t *head)
 
         free(head);
 }
+
+void free_all_args(void)
+{
+        close_file();
+        free_tokens();
+        free_args();
+}

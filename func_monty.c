@@ -75,7 +75,7 @@ void get_instruct(void)
 
 	instruction_t instruct[] = {
 		{"push", &push},{"pall", &pall},
-		{NULL, NULL}
+		{"pint", &pint}, {NULL, NULL}
 	};
 
 	if (arguments->n_tokens == 0) /* no instructions */
