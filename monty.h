@@ -4,6 +4,7 @@
 /* Macros */
 
 #define _GNU_SOURCE
+#define DELIMITERS "\t\r\n "
 
 /* Includes */
 
@@ -51,6 +52,10 @@ typedef struct arg_s
 {
         FILE *file;
         char *line;
+        unsigned int line_number;
+        char **tokens;
+        int n_tokens;
+        intstruction_t *instruct;
 } arg_t;
 
 /* Global Variables */
@@ -62,7 +67,7 @@ extern arg_t *arguments;
 int main(int argc, char **argv);
 void file_read(char *filename, stack_t **stack);
 void error_exit(stack_t **stack);
-char *line_tokenize(char *line);
+void *line_tokenize(void);
 void init_args(stack_t **stack);
 void free_args(stack_t *head);
 
