@@ -1,30 +1,27 @@
 #include "monty.h"
 
-void file_read(char *filename, stack_t **stack)
+void file_read(char *filename)
 {
 	size_t n = 0;
-	int read;
 	arguments->file = fopen(filename, "r");
 
 	if (arguments->file == NULL)
 	{
 		printf("Error: Can't open file %s\n", filename);
-		error_exit(stack);
+		exit(EXIT_FAILURE);
 	}
 
-	while ((read = getline(&arguments->line, &n, arguments->file)) != -1)
+	while (getline(&arguments->line, &n, arguments->file) != -1)
 	{
-		arguments->line = line_tokenize(arguments->file);
-		printf("%s", arguments->line);
-		if (arguments->line == NULL || arguments->line[0] == '#')
-		{
-			arguments->line_number += 1;
-			continue;
-		}
+		arguments->line_number += 1;
+		line_tokenize();
+		get_instruct();
+		run_instruct();
+		free_tokens();
 	}
 }
 
-void *line_tokenize(void)
+void line_tokenize()
 {
 	int i = 0;
 	char *op_code = NULL, *line_cpy = NULL;
@@ -33,9 +30,6 @@ void *line_tokenize(void)
 	strcpy(line_cpy, arguments->line);
 	arguments->n_tokens = 0;
 	op_code = strtok(line_cpy, DELIMITERS);
-	if (op_code == NULL)
-		return (NULL);
-
 	while (op_code)
 	{
 		arguments->n_tokens += 1;
@@ -50,10 +44,7 @@ void *line_tokenize(void)
 		arguments->tokens[i] = malloc(sizeof(char) *
 					      (strlen(op_code) + 1));
 		if (arguments->tokens[i] == NULL)
-		{
-			printf("Error: malloc failed\n");
-			error_exit(stack);
-		}
+			malloc_fail();
 		strcpy(arguments->tokens[i], op_code);
 		op_code = strtok(NULL, DELIMITERS);
 		i++;
@@ -62,22 +53,52 @@ void *line_tokenize(void)
 	free(line_cpy);
 }
 
-void init_args(stack_t **stack)
+void init_args()
 {
 	arguments = malloc(sizeof(arg_t));
 	if (arguments == NULL)
-	{
-		printf("Error: malloc failed\n");
-		error_exit(stack);
-	}
+		malloc_fail();
+
 	arguments->instruct = malloc(sizeof(instruction_t));
 	if (arguments->instruct == NULL)
-	{
-		printf("Error: malloc failed\n");
-		error_exit(stack);
-	}
+		malloc_fail();
+
 	arguments->file = NULL;
 	arguments->line = NULL;
 	arguments->n_tokens = 0;
 	arguments->line_number = 0;
+}
+
+void get_instruct(void)
+{
+	int i = 0;
+
+	instruction_t instruct[] = {
+		{"push", &push},{"pall", &pall},
+		{NULL, NULL}
+	};
+
+	if (arguments->n_tokens == 0) /* no instructions */
+		return;
+	
+	for (; instruct[i].opcode != NULL; i++)
+	{
+		if (strcmp(instruct[i].opcode, arguments->tokens[0]) == 0)
+		{
+			arguments->instruct->opcode = instruct[i].opcode;
+			arguments->instruct->f = instruct[i].f;
+			return;
+		}
+	}
+	invalid_instruct();
+}
+
+void run_instruct(void)
+{
+	stack_t *stack = NULL;
+
+	if (arguments->n_tokens == 0)
+		return;
+	
+	arguments->instruct->f(&stack, arguments->line_number);
 }

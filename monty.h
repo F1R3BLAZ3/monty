@@ -55,7 +55,9 @@ typedef struct arg_s
         unsigned int line_number;
         char **tokens;
         int n_tokens;
-        intstruction_t *instruct;
+        stack_t *head;
+        int stack_length;
+        instruction_t *instruct;
 } arg_t;
 
 /* Global Variables */
@@ -64,11 +66,26 @@ extern arg_t *arguments;
 
 /* Function Declarations */
 
-int main(int argc, char **argv);
-void file_read(char *filename, stack_t **stack);
-void error_exit(stack_t **stack);
-void *line_tokenize(void);
-void init_args(stack_t **stack);
-void free_args(stack_t *head);
+void file_read(char *filename);
+void line_tokenize();
+void init_args();
+void get_instruct(void);
+void run_instruct(void);
+void free_args(void);
+void malloc_fail(void);
+void close_file(void);
+void invalid_instruct(void);
+void free_tokens(void);
+int is_number(char *str);
+void free_head(void);
+void free_stack(stack_t *head);
+
+void push(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */

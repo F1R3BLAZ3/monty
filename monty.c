@@ -11,10 +11,12 @@ int main(int argc, char **argv)
 	if (argc != 2)
 	{
 		printf("USAGE: monty file\n");
-		error_exit(&stack);
+		exit(EXIT_FAILURE);
 	}
         init_args(&stack);
-        file_read(argv[1], &stack);
+        file_read(argv[1]);
 
+        close_file();
+        free_args();
         return (0);
 }
