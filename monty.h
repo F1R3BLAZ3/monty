@@ -87,7 +87,7 @@ typedef struct arg_s
 
 /* Global Variables */
 
-extern arg_t *arguments; 
+extern arg_t *arguments;
 
 /* Function Declarations */
 
