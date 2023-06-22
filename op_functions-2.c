@@ -76,7 +76,7 @@ void sub(stack_t **stack, unsigned int line_number)
 
 void pchar(stack_t **stack, unsigned int line_number)
 {
-	(void)stack; // Not used in this implementation
+	(void)stack;
 
 	if (arguments->head == NULL)
 	{
