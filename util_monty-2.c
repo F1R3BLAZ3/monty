@@ -103,3 +103,4 @@ void run_instruct(void)
 
 	arguments->instruct->f(&stack, arguments->line_number);
 }
+

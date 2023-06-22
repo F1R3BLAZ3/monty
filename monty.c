@@ -1,5 +1,7 @@
 #include "monty.h"
 
+arg_t *arguments = NULL;
+
 /**
  * main - Entry point of the program
  * @argc: The number of command-line arguments
@@ -17,10 +19,8 @@
  */
 int main(int argc, char **argv)
 {
-	stack_t *stack;
 	(void)argv;
 
-	stack = NULL;
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
