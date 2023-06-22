@@ -24,7 +24,8 @@
  *
  * Return: This function does not return a value.
  */
-void free_args()
+
+void free_args(void)
 {
 	if (arguments == NULL)
 		return;
@@ -59,7 +60,7 @@ void free_args()
  *
  * Return: This function does not return a value.
  */
-void malloc_fail()
+void malloc_fail(void)
 {
 	fprintf(stderr, "Error: malloc failed\n");
 	free_args();
@@ -78,6 +79,7 @@ void malloc_fail()
  *
  * Return: This function does not return a value.
  */
+
 void close_file(void)
 {
 	if (arguments->file == NULL)
@@ -99,12 +101,34 @@ void close_file(void)
  */
 void invalid_instruct(void)
 {
-	fprintf(stderr, "L%d: unknown instruction %s\n", arguments->line_number, arguments->tokens[0]);
+	fprintf(stderr, "L%d: unknown instruction %s\n", arguments->line_number,
+	arguments->tokens[0]);
 	close_file();
 	free_tokens();
 	free_args();
 	exit(EXIT_FAILURE);
 }
+
+/**
+ * free_tokens - Free the memory allocated for the token array
+ *
+ * Description: This function frees the memory allocated for the token array
+ * in the `arguments` structure. It first checks if the `arguments->tokens`
+ * pointer is NULL. If it is, the function returns without performing any
+ * operations.
+ *
+ * The function then iterates over each element of the token array and frees
+ * the memory allocated for each token using the `free` function.
+ *
+ * After freeing the individual token memory, the function frees the memory
+ * allocated for the token array itself using the `free` function. Finally,
+ * the `arguments->tokens` pointer is set to NULL to indicate that the array
+ * is no longer valid.
+ *
+ * Parameters: None
+ *
+ * Return: This function does not return a value.
+ */
 
 void free_tokens(void)
 {

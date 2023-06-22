@@ -19,6 +19,7 @@
 void file_read(char *filename)
 {
 	size_t n = 0;
+
 	arguments->file = fopen(filename, "r");
 
 	if (arguments->file == NULL)
@@ -53,7 +54,7 @@ void file_read(char *filename)
  *
  * Return: This function does not return a value.
  */
-void line_tokenize()
+void line_tokenize(void)
 {
 	int i = 0;
 	char *op_code = NULL, *line_cpy = NULL;
@@ -98,7 +99,7 @@ void line_tokenize()
  *
  * Return: This function does not return a value.
  */
-void init_args()
+void init_args(void)
 {
 	arguments = malloc(sizeof(arg_t));
 	if (arguments == NULL)
@@ -113,6 +114,21 @@ void init_args()
 	arguments->n_tokens = 0;
 	arguments->line_number = 0;
 }
+
+/**
+ * get_instruct - Get the appropriate instruction function based on the opcode
+ *
+ * Description: This function matches the opcode in the first token of the
+ * `arguments->tokens` array with the corresponding opcode in the `instruct`
+ * array of `instruction_t` structs. If a match is found, the corresponding
+ * opcode and function pointers are assigned to the `arguments->instruct`
+ * structure. If no match is found, the function calls `invalid_instruct`
+ * to handle the error. If there are no tokens in the `arguments` structure,
+ * indicating no instructions, the function returns without assigning any
+ * opcode or function.
+ *
+ * Return: This function does not return a value.
+ */
 
 void get_instruct(void)
 {
@@ -136,26 +152,3 @@ void get_instruct(void)
 	invalid_instruct();
 }
 
-/**
- * get_instruct - Get the appropriate instruction function based on the opcode
- *
- * Description: This function matches the opcode in the first token of the
- * `arguments->tokens` array with the corresponding opcode in the `instruct`
- * array of `instruction_t` structs. If a match is found, the corresponding
- * opcode and function pointers are assigned to the `arguments->instruct`
- * structure. If no match is found, the function calls `invalid_instruct`
- * to handle the error. If there are no tokens in the `arguments` structure,
- * indicating no instructions, the function returns without assigning any
- * opcode or function.
- *
- * Return: This function does not return a value.
- */
-void run_instruct(void)
-{
-	stack_t *stack = NULL;
-
-	if (arguments->n_tokens == 0)
-		return;
-
-	arguments->instruct->f(&stack, arguments->line_number);
-}
