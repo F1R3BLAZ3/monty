@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 	stack = NULL;
 	if (argc != 2)
 	{
-		printf("USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
         init_args(&stack);

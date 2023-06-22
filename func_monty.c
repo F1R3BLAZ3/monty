@@ -7,7 +7,7 @@ void file_read(char *filename)
 
 	if (arguments->file == NULL)
 	{
-		printf("Error: Can't open file %s\n", filename);
+		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
 

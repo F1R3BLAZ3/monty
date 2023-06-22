@@ -24,7 +24,7 @@ void free_args()
 
 void malloc_fail()
 {
-        printf("Error: malloc failed\n");
+        fprintf(stderr, "Error: malloc failed\n");
         free_args();
         exit(EXIT_FAILURE);
 }
@@ -39,7 +39,7 @@ void close_file(void)
 
 void invalid_instruct(void)
 {
-        printf("L%d: unknown instruction %s\n", arguments->line_number, arguments->tokens[0]);
+        fprintf(stderr, "L%d: unknown instruction %s\n", arguments->line_number, arguments->tokens[0]);
         close_file();
         free_tokens();
         free_args();

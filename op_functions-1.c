@@ -5,7 +5,7 @@ void push(stack_t **stack, unsigned int line_number)
         if (arguments->n_tokens <= 1 || !(is_number(arguments->tokens[1])))
         {
                 free_args();
-                printf("L%d: usage: push integer\n", line_number);
+                fprintf(stderr, "L%d: usage: push integer\n", line_number);
                 exit(EXIT_FAILURE);
         }
 
@@ -67,7 +67,7 @@ void pint(stack_t **stack, unsigned int line_number)
         (void) stack;
         if (arguments->head == NULL)
         {
-                printf("L%d: can't pint, stack empty", line_number);
+                fprintf(stderr, "L%d: can't pint, stack empty", line_number);
                 free_all_args();
                 exit(EXIT_FAILURE);
         }
