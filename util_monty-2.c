@@ -104,3 +104,20 @@ void run_instruct(void)
 	arguments->instruct->f(&stack, arguments->line_number);
 }
 
+/**
+ * delete_stack_node - Delete the top node of the stack
+ *
+ * Description: This function deletes the top node of the stack by updating
+ * the head pointer and freeing the memory allocated for the node. It does not
+ * modify the stack length.
+ *
+ * Return: This function does not return a value.
+ */
+void delete_stack_node(void)
+{
+	stack_t *temp;
+
+	temp = arguments->head;
+	arguments->head = temp->next;
+	free(temp);
+}
