@@ -31,6 +31,9 @@ void file_read(char *filename)
 	while (getline(&arguments->line, &n, arguments->file) != -1)
 	{
 		arguments->line_number += 1;
+		if (arguments->line[0] == '#')
+			continue;
+
 		line_tokenize();
 		get_instruct();
 		run_instruct();
