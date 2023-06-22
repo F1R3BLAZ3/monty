@@ -67,3 +67,26 @@ void sub(stack_t **stack, unsigned int line_number)
 	pop(&arguments->head, line_number);
 	arguments->head->n = result;
 }
+
+/**
+ * pchar - Prints the character at the top of the stack
+ * @arguments: Pointer to the argument structure
+ * @line_number: Line number of the opcode being executed
+ */
+
+void pchar(arg_t *arguments, unsigned int line_number)
+{
+	if (arguments->head == NULL)
+	{
+		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	if (arguments->head->n < 0 || arguments->head->n > 127)
+	{
+		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	printf("%c\n", (char)(arguments->head->n));
+}
