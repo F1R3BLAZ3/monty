@@ -59,7 +59,7 @@ void nop(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * div - Divide the second element of the stack by the top element
+ * _div - Divide the second element of the stack by the top element
  * @stack: Double pointer to the stack
  * @line_number: Line number of the instruction
  *
@@ -126,6 +126,49 @@ void mul(stack_t **stack, unsigned int line_number)
 	}
 
 	second->n = second->n * top->n;
+	delete_stack_node();
+
+	arguments->stack_length -= 1;
+}
+
+/**
+ * mod - Compute the remainder of the division of the second element by the top
+ * element
+ * @stack: Double pointer to the stack
+ * @line_number: Line number of the instruction
+ *
+ * Description: This function computes the remainder of the division of the
+ * value of the second element of the stack by the value of the top element.
+ * The result is stored in the second element of the stack, and the top element
+ * is removed. If the stack does not have at least two elements,
+ * an error message is printed to the standard error, and the program is exited
+ * with a failure status code. If the top element is 0,
+ * an error message for division by zero is printed,
+ * and the program is exited with a failure status code.
+ *
+ * Return: This function does not return a value.
+ */
+void mod(stack_t **stack, unsigned int line_number)
+{
+	stack_t *top = arguments->head;
+	stack_t *second = top->next;
+
+	(void)stack;
+	if (arguments->stack_length < 2)
+	{
+		fprintf(stderr, "L%d: cant't mod, stack too short\n", line_number);
+		free_all_args();
+		exit(EXIT_FAILURE);
+	}
+
+	if (top->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		free_all_args();
+		exit(EXIT_FAILURE);
+	}
+
+	second->n = second->n % top->n;
 	delete_stack_node();
 
 	arguments->stack_length -= 1;
