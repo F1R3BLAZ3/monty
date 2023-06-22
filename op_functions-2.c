@@ -3,6 +3,9 @@
 /**
  * swap - Swap the top two elements of the stack
  *
+ * @stack: Double pointer to the stack
+ * @line_number: Line number of the instruction
+ *
  * Description: This function swaps the positions of the top two elements
  * of the stack. If the stack contains less than two elements, it prints
  * an error message and exits with a failure status code.
@@ -34,18 +37,16 @@ void swap(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * sub - Subtract the top element of the stack from the second top element
+ * sub - Subtract the top element from the second top element of the stack
+ *
+ * @stack: Double pointer to the stack
+ * @line_number: Line number of the instruction
  *
  * Description: This function subtracts the top element of the stack from
- * the second top element. If the stack contains less than two elements, it
- * prints an error message indicating that the stack is too short, followed
- * by a new line, and exits with a failure status code.
- * The result of the subtraction is stored in the second top element of the
- * stack, and the top element is removed, making the stack one element shorter.
- * At the end, the top element of the stack contains the result.
- *
- * @stack: Double pointer to the head of the stack
- * @line_number: The line number being executed in the Monty file
+ * the second top element. If the stack contains less than two elements,
+ * it prints an error message and exits with a failure status code. The
+ * result is stored in the second top element, and the top element is removed,
+ * making the stack one element shorter.
  *
  * Return: This function does not return a value.
  */
