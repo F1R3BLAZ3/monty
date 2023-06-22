@@ -135,7 +135,8 @@ void get_instruct(void)
 	int i = 0;
 
 	instruction_t instruct[] = {
-	    {"push", &push}, {"pall", &pall}, {"pint", &pint}, {NULL, NULL}};
+	    {"push", &push}, {"pall", &pall}, {"pint", &pint}, {"pop", &pop},
+	    {NULL, NULL}};
 
 	if (arguments->n_tokens == 0) /* no instructions */
 		return;
@@ -151,4 +152,3 @@ void get_instruct(void)
 	}
 	invalid_instruct();
 }
-
