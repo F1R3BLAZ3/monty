@@ -18,7 +18,7 @@
  */
 void add(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp1, *temp2;
+	stack_t *top, *second;
 
 	(void)stack;
 	if (arguments->stack_length < 2)
@@ -28,10 +28,10 @@ void add(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	temp1 = arguments->head;
-	temp2 = temp1->next;
+	top = arguments->head;
+	second = top->next;
 
-	temp2->n = temp1->n + temp2->n;
+	second->n = top->n + second->n;
 	delete_stack_node();
 
 	arguments->stack_length -= 1;
@@ -56,4 +56,22 @@ void nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
+}
+
+void div(stack_t **stack, unsigned int line_number)
+{
+	stack_t *top = arguments->head;
+	stack_t *second = top->next;
+
+	(void)stack;
+	if (arguments->stack_length < 2)
+	{
+		fprintf(stderr, "L%d: cant't div, stack too short\)
+	}
+
+}
+
+void mul(stack_t **stack, unsigned int line_number)
+{
+	
 }
