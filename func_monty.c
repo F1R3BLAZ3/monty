@@ -143,7 +143,7 @@ void get_instruct(void)
 	    {"nop", &nop}, {"sub", &sub}, {"mod", &mod}, {"pchar", &pchar},
 	    {NULL, NULL}};
 
-	if (arguments->n_tokens == 0) /* no instructions */
+	if (arguments->n_tokens == 0) 
 		return;
 
 	for (; instruct[i].opcode != NULL; i++)
