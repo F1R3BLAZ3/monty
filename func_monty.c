@@ -140,7 +140,8 @@ void get_instruct(void)
 	instruction_t instruct[] = {
 	    {"push", &push}, {"pall", &pall}, {"pint", &pint}, {"pop", &pop},
 	    {"mul", &mul}, {"div", &_div}, {"swap", &swap}, {"add", &add},
-	    {"nop", &nop}, {"sub", &sub}, {"mod", &mod}, {NULL, NULL}};
+	    {"nop", &nop}, {"sub", &sub}, {"mod", &mod}, {"pchar", &pchar},
+	    {NULL, NULL}};
 
 	if (arguments->n_tokens == 0) /* no instructions */
 		return;
