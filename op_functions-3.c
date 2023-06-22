@@ -58,7 +58,21 @@ void nop(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 }
 
-void div(stack_t **stack, unsigned int line_number)
+/**
+ * div - Divide the second element of the stack by the top element
+ * @stack: Double pointer to the stack
+ * @line_number: Line number of the instruction
+ *
+ * Description: This function divides the value of the top element of the stack
+ * by the value of the second element. The result is stored in the second
+ * element of the stack, and the top element is removed. If the stack does not
+ * have at least two elements, or if the top element is 0, an error message is
+ * printed to the standard error, and the program is exited with a failure
+ * status code.
+ *
+ * Return: This function does not return a value.
+ */
+void _div(stack_t **stack, unsigned int line_number)
 {
 	stack_t *top = arguments->head;
 	stack_t *second = top->next;
@@ -66,12 +80,53 @@ void div(stack_t **stack, unsigned int line_number)
 	(void)stack;
 	if (arguments->stack_length < 2)
 	{
-		fprintf(stderr, "L%d: cant't div, stack too short\)
+		fprintf(stderr, "L%d: cant't div, stack too short\n", line_number);
+		free_all_args();
+		exit(EXIT_FAILURE);
 	}
 
+	if (top->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		free_all_args();
+		exit(EXIT_FAILURE);
+	}
+
+	second->n = second->n / top->n;
+	delete_stack_node();
+
+	arguments->stack_length -= 1;
 }
 
+/**
+ * mul - Multiply the second element of the stack with the top element
+ * @stack: Double pointer to the stack
+ * @line_number: Line number of the instruction
+ *
+ * Description: This function multiplies the value of the top element of the
+ * stack with the value of the second element. The result is stored in the
+ * second element of the stack, and the top element is removed.
+ * If the stack does not have at least two elements, an error message is
+ * printed to the standard error, and the program is exited with a failure
+ * status code.
+ *
+ * Return: This function does not return a value.
+ */
 void mul(stack_t **stack, unsigned int line_number)
 {
-	
+	stack_t *top = arguments->head;
+	stack_t *second = top->next;
+
+	(void)stack;
+	if (arguments->stack_length < 2)
+	{
+		fprintf(stderr, "L%d: cant't mul, stack too short\n", line_number);
+		free_all_args();
+		exit(EXIT_FAILURE);
+	}
+
+	second->n = second->n * top->n;
+	delete_stack_node();
+
+	arguments->stack_length -= 1;
 }
