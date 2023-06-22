@@ -105,6 +105,7 @@ int is_number(char *str);
 void free_head(void);
 void free_stack(stack_t *head);
 void free_all_args(void);
+void delete_stack_node(void);
 
 void push(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
